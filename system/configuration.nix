@@ -240,7 +240,7 @@ in {
       #softmaker-office
       corefonts
       vistafonts
-      viber
+      #viber
       xdg-utils
       qutebrowser
       youtube-music
@@ -257,8 +257,8 @@ in {
       onefetch
       fastfetch
       bat
-      xclip
-      xsel
+      #xclip
+      #xsel
       dust
       tealdeer
       fzf
@@ -266,6 +266,7 @@ in {
       tmux
       jq
       ripgrep
+      yazi
     ];
   };
 
