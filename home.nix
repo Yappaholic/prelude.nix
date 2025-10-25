@@ -13,7 +13,7 @@ in {
     ./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
-    #./modules/shell/nushell.nix
+    ./modules/shell/nushell.nix
     #./modules/shell/zsh.nix
   ];
   home.packages = with pkgs; [
@@ -112,9 +112,9 @@ in {
       v = "nvim";
     };
     shellInitLast = ''
-      fish_add_path "~/.cargo/bin"
-      fish_add_path "~/go/bin"
-      fish_add_path "~/.config/emacs/bin"
+      fish_add_path ~/.cargo/bin
+      fish_add_path ~/go/bin
+      fish_add_path ~/.config/emacs/bin
     '';
   };
 

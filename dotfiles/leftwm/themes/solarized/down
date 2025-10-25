@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
-
-leftwm-command "UnloadTheme"
-
-
-ps -alh | grep xmobar_control_script | awk '{print $3}' | xargs kill

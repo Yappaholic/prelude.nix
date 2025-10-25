@@ -1,5 +1,0 @@
-#!/bin/sh
-xset r rate 300 30
-setxkbmap us,ru -variant "colemak_dh_wide_iso," -option "grp:toggle,ctrl:nocaps"
-gammastep -l 56:27 -t 6500:3000 &
-picom &

@@ -10,7 +10,7 @@
     enableNushellIntegration = true;
   };
   programs.starship = {
-    enable = true;
+    enable = false;
     enableNushellIntegration = true;
   };
   # programs.oh-my-posh = {

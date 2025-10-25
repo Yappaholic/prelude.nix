@@ -9,29 +9,6 @@
   ...
 }: let
   system = "x86_64-linux";
-  zen-browser = inputs.zen-browser.packages."${system}".default;
-  ols-git =
-    pkgs.ols.overrideAttrs
-    (final: prev: {
-      src = pkgs.fetchFromGitHub {
-        owner = "DanielGavin";
-        repo = "ols";
-        rev = "nightly";
-        sha256 = "sha256-aUQKbZOrxDdUGORY2Rr2Drfxi0Q+dZZQSBCkJ+XQhcE=";
-      };
-      buildInputs = [odin-git];
-    });
-  odin-git =
-    pkgs.odin.overrideAttrs
-    (final: prev: {
-      version = "dev-2025-03";
-      src = pkgs.fetchFromGitHub {
-        owner = "odin-lang";
-        repo = "Odin";
-        rev = "dev-2025-03";
-        sha256 = "sha256-QmbKbhZglucVpsdlyxJsH2bslhqmd0nuMPC+E0dTpiY=";
-      };
-    });
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -40,13 +17,18 @@ in {
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.limine = {
+    enable = true;
+    efiSupport = true;
+  };
+  boot.zfs.package = pkgs.zfs_cachyos;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-gcc;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
   zramSwap.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.hostId = "ca423dd6";
   networking.enableIPv6 = false;
   networking.nameservers = ["8.8.8.8" "8.8.8.4"];
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -63,6 +45,14 @@ in {
 
   nix.settings = {
     experimental-features = ["nix-command" "flakes"];
+    substituters = lib.mkForce [
+      "https://nixos-cache-proxy.cofob.dev"
+      "https://chaotic-nyx.cachix.org"
+    ];
+    trusted-public-keys = [
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+    ];
   };
 
   # Set your time zone.
@@ -85,16 +75,8 @@ in {
   };
   programs.niri = {
     enable = true;
-    package = pkgs.niri_git;
   };
   services.flatpak.enable = true;
-  services.guix = {
-    enable = true;
-    substituters.urls = [
-      "https://bordeaux.guix.gnu.org"
-      "https://mirror.yandex.ru/mirrors/guix/"
-    ];
-  };
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [
@@ -122,14 +104,6 @@ in {
       options = "grp:toggle,ctrl:nocaps";
     };
     videoDrivers = ["nvidia"];
-    windowManager.qtile = {
-      enable = true;
-      package = inputs.qtile.packages.${system}.default;
-      extraPackages = python3Packages:
-        with python3Packages; [
-          qtile-extras
-        ];
-    };
     windowManager.xmonad = {
       enable = false;
       enableContribAndExtras = true;
@@ -182,7 +156,7 @@ in {
     };
   };
   services.emacs = {
-    enable = true;
+    enable = false;
     install = true;
     package = with pkgs; (
       (emacsPackagesFor emacs-pgtk).emacsWithPackages (
@@ -224,7 +198,7 @@ in {
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       # Programming languages
@@ -239,13 +213,12 @@ in {
       man-pages-posix
 
       # Editors and text
-      emacs-lsp-booster
       kakoune-unwrapped
       kakoune-lsp
 
       # Window managers and desktop
-      feh
-      gammastep
+      #feh
+      #gammastep
       #rofi
       #picom-pijulius
       #polybarFull
@@ -268,7 +241,7 @@ in {
       vistafonts
       viber
       xdg-utils
-      zen-browser
+      qutebrowser
       youtube-music
       wmenu
 

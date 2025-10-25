@@ -1,5 +1,0 @@
-#!/bin/sh
-
-pgrep picom > /dev/null || picom &
-pgrep emacs > /dev/null || emacs --daemon &
-pgrep gammastep > /dev/null || gammastep -t 6500:3000 -l 56:27 &

@@ -3,12 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
-    qtile = {
-      url = "github:qtile/qtile/wayc";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";

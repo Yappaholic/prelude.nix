@@ -57,6 +57,8 @@ in {
         mouse = false;
         completion-timeout = 5;
         lsp.display-messages = true;
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics.cursor-line = "error";
         file-picker.hidden = false;
         cursor-shape = {
           insert = "bar";

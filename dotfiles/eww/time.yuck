@@ -1,9 +1,0 @@
-(defpoll date :interval "5s" "scripts/clock date")
-(defpoll time :interval "5s" "scripts/clock time")
-(defwidget clock [] 
-	(box  :orientation "h"
-						 :class "time"
-	(label 
-		:tooltip "${date}" 
-		:text "${time}")
-))
