@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+SCRIPTPATH=$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
+echo "I will partition disks according to ${SCRIPTPATH}/disko.nix"
+echo "You should check the config file before proceeding!!!"
+read -n 1 -p "Do you want to proceed? [Y/N]" confirm
+
+if [[ $confirm == [Yy] ]]; then
+	sudo -k
+  sudo nix --experimental-features "nix-command flakes"\
+  run github:nix-community/disko/latest --\
+  --mode destroy,format,mount /tmp/disk-config.nix
+elif [[ $confirm == [Nn] ]]; then
+  echo "Goodbye!"
+	exit 1
+else
+	echo "Wrong type of answer"
+	exit 1
+fi
