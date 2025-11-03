@@ -28,7 +28,6 @@ in {
       path: uuid(4d96f285-5db8-11f0-95ec-1c1b0d09ace4):/EFI/Microsoft/Boot/bootmgfw.efi
     '';
   };
-  boot.zfs.package = pkgs.zfs_cachyos;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
   boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
@@ -36,10 +35,9 @@ in {
     enable = true;
     priority = 10;
     algorithm = "lz4";
-    memoryPercent = 100;
+    memoryPercent = 150;
   };
   networking.hostName = "nixos"; # Define your hostname.
-  networking.hostId = "ca423dd6";
   networking.enableIPv6 = false;
   networking.nameservers = ["8.8.8.8" "8.8.8.4"];
   nix.nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -117,7 +115,7 @@ in {
     };
     videoDrivers = ["nvidia"];
     windowManager.xmonad = {
-      enable = true;
+      enable = false;
       enableContribAndExtras = true;
       config = null;
       enableConfiguredRecompile = true;
@@ -229,7 +227,7 @@ in {
       kakoune-lsp
 
       # Window managers and desktop
-      feh
+      #feh
       #gammastep
       #rofi
       #picom-pijulius
@@ -239,9 +237,9 @@ in {
       #leftwm
       #leftwm-config
       #leftwm-theme
-      xmobar
-      xdotool
-      trayer
+      #xmobar
+      #xdotool
+      #trayer
       waybar
       wlsunset
       wl-clipboard
@@ -249,8 +247,8 @@ in {
       telegram-desktop
       wlogout
       #softmaker-office
-      corefonts
-      vistafonts
+      #corefonts
+      #vistafonts
       #viber
       xdg-utils
       qutebrowser

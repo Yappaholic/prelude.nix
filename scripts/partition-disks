@@ -10,7 +10,7 @@ if [[ $confirm == [Yy] ]]; then
 	sudo -k
   sudo nix --experimental-features "nix-command flakes"\
   run github:nix-community/disko/latest --\
-  --mode destroy,format,mount /tmp/disk-config.nix
+  --mode destroy,format,mount ${SCRIPTPATH}/disko.nix
 elif [[ $confirm == [Nn] ]]; then
   echo "Goodbye!"
 	exit 1
