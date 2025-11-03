@@ -3,12 +3,23 @@
 # Generate and install hardware-configuration for the install process
 
 SCRIPTPATH=$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
+
+if [[ $2 == "" ]]; then
+  echo "Specify which system you want to use"
+  echo "Either desktop or laptop"
+  exit 1
+fi
+
 if [[ $1 != "" ]]; then
     if [[ $1 == "/" ]]; then
         echo "Dont specify / next time!"
         echo "Using / as a default option..."
         sudo nixos-generate-config
-        sudo cp -v /etc/nixos/hardware-configuration.nix "$SCRIPTPATH/../system/hardware-configuration.nix"
+        if [[ $2 == "desktop" ]]; then
+          sudo cp -v /etc/nixos/hardware-configuration.nix "$SCRIPTPATH/../system/hardware-desktop.nix"
+        elif [[ $2 == "laptop" ]]; then
+          sudo cp -v /etc/nixos/hardware-configuration.nix "$SCRIPTPATH/../system/hardware-laptop.nix"
+        fi
     else
         sudo nixos-generate-config --root "$1"
         sudo cp -v "$1/etc/nixos/hardware-configuration.nix" "$SCRIPTPATH/../system/hardware-configuration.nix"
