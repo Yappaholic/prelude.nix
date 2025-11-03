@@ -1,21 +1,21 @@
 {pkgs, ...}: let
-  languages = import ./languages.nix {pkgs = pkgs;};
+  languages = import ./languages.nix {inherit pkgs;};
   lsp = import ./lsp.nix;
   keymaps = import ./keymaps.nix;
 in {
   programs.nvf = {
     enable = true;
+    enableManpages = true;
     settings = {
       vim = {
         inherit keymaps;
         inherit languages;
         inherit lsp;
+        extraPlugins = import ./plugins.nix {inherit pkgs;};
         package = pkgs.neovim-unwrapped;
         enableLuaLoader = true;
         theme = {
           enable = true;
-          name = "oxocarbon";
-          style = "dark";
         };
         options = {
           autoindent = false;

@@ -2,7 +2,7 @@
   menu = "wmenu-run";
   browser = "zen";
   mod = "Mod4";
-  terminal = "wezterm";
+  terminal = "kitty";
 in {
   modifier = "Mod4";
   defaultWorkspace = "workspace number 1";
@@ -20,7 +20,7 @@ in {
       bg = "~/Pictures/wallpaper.jpg fill";
       resolution = "1920x1080";
       scale = "1.0";
-      adaptive_sync = "on";
+      adaptive_sync = "off";
     };
   };
   up = "k";
@@ -31,15 +31,17 @@ in {
   keybindings = lib.mkOptionDefault {
     #Apps
     "${mod}+Return" = "exec ${terminal}";
-    "${mod}+p" = "exec ${menu}";
+    "${mod}+Space" = "exec ${menu}";
     "${mod}+t" = "exec ${browser}";
     "${mod}+e" = "exec emacsclient -c";
     # System
-    "${mod}+c" = "kill";
+    "${mod}+q" = "kill";
     "${mod}+d" = "layout stacking";
     "${mod}+Shift+c" = "reload";
     "${mod}+Shift+minus" = "move scratchpad";
     "${mod}+minus" = "scratchpad show";
+    "${mod}+r" = "cycle_size h next";
+    "${mod}+o" = "jump";
   };
 
   gaps = {
@@ -51,7 +53,7 @@ in {
   bars = [
     {
       fonts = {
-        names = ["JetBrainsMono Nerd Font Mono"];
+        names = ["Maple Mono NF"];
         size = 11.0;
       };
       colors = {
@@ -69,6 +71,6 @@ in {
     }
   ];
   startup = [
-    {command = "gammastep -l 56:27 -t 6500:3000";}
+    {command = "systemctl --user start gammastep";}
   ];
 }

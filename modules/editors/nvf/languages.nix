@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   enableTreesitter = true;
   enableExtraDiagnostics = true;
+  purescript.enable = true;
   nix = {
     enable = true;
     lsp = {
@@ -56,5 +57,8 @@
   };
   bash.enable = true;
   php.enable = true;
-  odin.enable = true;
+  haskell = {
+    enable = true;
+    dap.enable = false;
+  };
 }

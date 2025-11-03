@@ -3,7 +3,7 @@ in {
   programs.nushell = {
     enable = true;
     shellAliases = {
-      vim = "nvim";
+      v = "nvim";
       k = "kak";
       nhs = "nh os switch";
       nht = "nh os test";

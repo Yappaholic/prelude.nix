@@ -9,6 +9,7 @@
   ...
 }: let
   system = "x86_64-linux";
+  yt-x = inputs.yt-x.packages.${system}.default;
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -20,13 +21,23 @@ in {
   boot.loader.limine = {
     enable = true;
     efiSupport = true;
+    enableEditor = true;
+    extraEntries = ''
+      /Windows
+      protocol: efi
+      path: uuid(4d96f285-5db8-11f0-95ec-1c1b0d09ace4):/EFI/Microsoft/Boot/bootmgfw.efi
+    '';
   };
   boot.zfs.package = pkgs.zfs_cachyos;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
   boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
-  zramSwap.enable = true;
-
+  zramSwap = {
+    enable = true;
+    priority = 10;
+    algorithm = "lz4";
+    memoryPercent = 100;
+  };
   networking.hostName = "nixos"; # Define your hostname.
   networking.hostId = "ca423dd6";
   networking.enableIPv6 = false;
@@ -106,7 +117,7 @@ in {
     };
     videoDrivers = ["nvidia"];
     windowManager.xmonad = {
-      enable = false;
+      enable = true;
       enableContribAndExtras = true;
       config = null;
       enableConfiguredRecompile = true;
@@ -199,7 +210,7 @@ in {
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       # Programming languages
@@ -218,19 +229,19 @@ in {
       kakoune-lsp
 
       # Window managers and desktop
-      #feh
+      feh
       #gammastep
       #rofi
       #picom-pijulius
       #polybarFull
       #polybar-pulseaudio-control
-      ghostty
+      kitty
       #leftwm
       #leftwm-config
       #leftwm-theme
-      #xmobar
-      #xdotool
-      #trayer
+      xmobar
+      xdotool
+      trayer
       waybar
       wlsunset
       wl-clipboard
@@ -245,9 +256,11 @@ in {
       qutebrowser
       youtube-music
       wmenu
+      yt-x
 
       # CLI tools
       nix-your-shell
+      nurl
       gitu
       pass-wayland
       bc
@@ -257,8 +270,8 @@ in {
       onefetch
       fastfetch
       bat
-      #xclip
-      #xsel
+      xclip
+      xsel
       dust
       tealdeer
       fzf

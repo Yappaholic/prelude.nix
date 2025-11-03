@@ -14,6 +14,10 @@ in {
     ./modules/util/other.nix
     ./modules/util/gtk.nix
     ./modules/shell/nushell.nix
+    ./modules/shell/fish.nix
+    # NVF
+    inputs.nvf.homeManagerModules.default
+    ./modules/editors/nvf/nvf.nix
     #./modules/shell/zsh.nix
   ];
   home.packages = with pkgs; [
@@ -29,8 +33,17 @@ in {
     };
   };
   services = {
-    wlsunset = {
+    gammastep = {
       enable = true;
+      latitude = 56.0;
+      longitude = 27.0;
+      temperature = {
+        day = 6500;
+        night = 2500;
+      };
+    };
+    wlsunset = {
+      enable = false;
       sunrise = "06:30";
       sunset = "21:30";
       temperature = {
@@ -66,56 +79,17 @@ in {
         systemd.enable = true;
       };
       sway = {
-        enable = false;
+        enable = true;
         package = null;
-        config = import ./modules/wm/sway/config.nix {lib = lib;};
+        checkConfig = false;
+        config = import ./modules/wm/sway/config.nix {inherit lib;};
         extraConfig = ''
-          blur enable
-          blur_xray disable
-          blur_passes 3
-          blur_radius 3
-          default_dim_inactive 0.1
+          layout_default_width 1.0
+          layout_width [0.5, 0.8, 1.0]
+          maximize_if_single true
         '';
       };
     };
-  };
-  programs.fish = {
-    enable = true;
-    plugins = with pkgs.fishPlugins; [
-      {
-        name = "hydro";
-        src = hydro.src;
-      }
-      {
-        name = "sponge";
-        src = sponge.src;
-      }
-      {
-        name = "fzf-fish";
-        src = fzf-fish.src;
-      }
-      {
-        name = "fishbang";
-        src = fishbang.src;
-      }
-      {
-        name = "done";
-        src = done.src;
-      }
-    ];
-    shellAbbrs = {
-      nhs = "nh os switch";
-      nht = "nh os test";
-      ls = "eza --color=always --icons=always";
-      la = "eza -la --color=always --icons=always";
-      k = "kak";
-      v = "nvim";
-    };
-    shellInitLast = ''
-      fish_add_path ~/.cargo/bin
-      fish_add_path ~/go/bin
-      fish_add_path ~/.config/emacs/bin
-    '';
   };
 
   programs.tmux = import ./modules/shell/tmux.nix {pkgs = pkgs;};

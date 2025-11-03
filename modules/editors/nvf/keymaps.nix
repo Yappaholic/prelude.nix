@@ -13,4 +13,11 @@
     silent = true;
     desc = "Open Git";
   }
+  {
+    key = "<c-g>";
+    mode = ["n"];
+    action = ":noh<CR>";
+    silent = true;
+    desc = "Remove highlight";
+  }
 ]

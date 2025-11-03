@@ -11,6 +11,9 @@
 in {
   ashen = {
     package = ashen-package;
-    setup = "require('ashen').setup({})";
+    setup = ''
+      require('ashen').setup({})
+      vim.cmd("colorscheme ashen")
+    '';
   };
 }
