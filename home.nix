@@ -10,15 +10,17 @@ in {
   home.homeDirectory = "/home/savvy";
   home.stateVersion = "24.05";
   imports = [
-    ./modules/editors/helix.nix
+    #./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
-    ./modules/shell/nushell.nix
+    #./modules/shell/nushell.nix
     ./modules/shell/fish.nix
-    # NVF
-    inputs.nvf.homeManagerModules.default
-    ./modules/editors/nvf/nvf.nix
+    ./modules/programs/ghostty.nix
+    ./modules/wm/mango.nix
+    #./modules/programs/qutebrowser.nix
     #./modules/shell/zsh.nix
+    inputs.mango.hmModules.mango
+    inputs.zen-browser.homeModules.beta
   ];
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -66,6 +68,7 @@ in {
       herbstluftwm = import ./modules/wm/herbsluftwm/config.nix {pkgs = pkgs;};
     };
   };
+  programs.zen-browser.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
