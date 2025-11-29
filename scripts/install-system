@@ -3,6 +3,6 @@
 
 SCRIPTPATH=$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
-sudo nixos-install --flake ${SCRIPTPATH}/..#nixos\
+sudo nixos-install --flake ${SCRIPTPATH}/..#mirl\
 	--option 'extra-substituters' 'https://chaotic-nyx.cachix.org/'\
        	--option extra-trusted-public-keys "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
