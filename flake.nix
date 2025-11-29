@@ -8,9 +8,24 @@
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf = {
-      url = "github:Yappaholic/nvf";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+    qtile = {
+      url = "github:qtile/qtile";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ghostty = {
+      url = "github:ghostty-org/ghostty";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    mango.url = "github:DreamMaoMao/mangowc";
+    neovim-nightly = {
+      url = "github:nix-community/neovim-nightly-overlay";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,17 +37,19 @@
     nixpkgs,
     home-manager,
     chaotic,
+    mango,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
   in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.mirl = nixpkgs.lib.nixosSystem {
       system = system;
       specialArgs = {inherit inputs;};
       modules = [
-        ./system/configuration.nix
+        ./system/desktop.nix
         home-manager.nixosModules.home-manager
+        mango.nixosModules.mango
         chaotic.nixosModules.default
         {
           home-manager.useUserPackages = true;

@@ -1,2 +1,5 @@
 result/**
 result
+
+# Ignore hardware configurations for desktop/laptop
+system/hardware*
