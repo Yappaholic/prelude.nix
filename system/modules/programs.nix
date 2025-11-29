@@ -25,9 +25,10 @@
       ];
     };
     niri = {
-      enable = true;
+      enable = false;
       package = pkgs.niri_git;
     };
+    mango.enable = true;
     xwayland = {
       enable = true;
       package = pkgs.xwayland-satellite;

@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  neovim-git = inputs.neovim-nightly.packages.${pkgs.system}.default;
+in {
   # Set modern swap with 150% value ov RAM
   zramSwap = {
     enable = true;
@@ -46,10 +48,10 @@
   # Screensharing and filepickers on wayland
   xdg.portal = {
     enable = true;
-    config.common.default = "*";
+    config.common.default = "gtk";
     wlr.enable = lib.mkForce true;
     extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
+      xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
   };
@@ -67,7 +69,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    vim
+    neovim-git
     git
     home-manager
   ];

@@ -1,22 +1,26 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   services = {
     flatpak.enable = true;
     # X config
     xserver = {
       enable = true;
       exportConfiguration = false;
-      displayManager.session = [
-        {
-          manage = "window";
-          name = "leftwm";
-          start = ''exec dbus-launch leftwm'';
-        }
-      ];
       xkb = {
         layout = "us,ru";
         options = "grp:toggle,ctrl:nocaps";
       };
-
+      windowManager.qtile = {
+        enable = true;
+        package = inputs.qtile.packages.${pkgs.system}.qtile;
+        extraPackages = python313Packages:
+          with python313Packages; [
+            pulsectl-asyncio
+          ];
+      };
       windowManager.xmonad = {
         enable = false;
         enableContribAndExtras = true;
@@ -34,9 +38,6 @@
     # TUI display manager
     displayManager.ly = {
       enable = true;
-      settings = {
-        path = "/run/current-system/sw/bin:/opt/bin";
-      };
     };
 
     # Emacs with packages and daemon

@@ -20,7 +20,7 @@
     inputs.home-manager.nixosModules.default
   ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "mirl"; # Define your hostname.
 
   boot.loader.limine.extraEntries = ''
     /Windows

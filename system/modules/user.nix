@@ -14,10 +14,20 @@ in {
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       # Programming languages
+      ty
+      ruff
       alejandra
+      odin
+      ols
+      go
+      gopls
+      gofumpt
+      bun
+      typescript-language-server
+      vscode-langservers-extracted
       #bash-env-nushell
       nixd
-      clang
+      gcc15
       rustup
       clang-tools
       #godot-mono
@@ -29,19 +39,8 @@ in {
       kakoune-lsp
 
       # Window managers and desktop
-      #feh
-      #gammastep
-      #rofi
-      #picom-pijulius
-      #polybarFull
-      #polybar-pulseaudio-control
       kitty
-      #leftwm
-      #leftwm-config
-      #leftwm-theme
-      #xmobar
-      #xdotool
-      #trayer
+      ghostty
       waybar
       wlsunset
       wl-clipboard
@@ -53,10 +52,9 @@ in {
       #vistafonts
       #viber
       xdg-utils
-      qutebrowser
       youtube-music
+      vesktop
       wmenu
-      yt-x
 
       # CLI tools
       nix-your-shell
@@ -66,6 +64,7 @@ in {
       bc
       mpv
       yt-dlp
+      yt-x
       btop
       onefetch
       fastfetch
