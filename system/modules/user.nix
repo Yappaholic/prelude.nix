@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  system = "x86_64-linux";
+  system = pkgs.stdenv.hostPlatform.system;
   yt-x = inputs.yt-x.packages.${system}.default;
 in {
   # My user account
@@ -14,8 +14,9 @@ in {
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       # Programming languages
-      ty
-      ruff
+      zig
+      zls
+      haskell-language-server
       alejandra
       odin
       ols
@@ -39,7 +40,13 @@ in {
       kakoune-lsp
 
       # Window managers and desktop
-      kitty
+      ## X11
+      xmobar
+      xdotool
+      feh
+      trayer
+      xclip
+      ## Other
       ghostty
       waybar
       wlsunset

@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  system = "x86_64-linux";
+  system = pkgs.stdenv.hostPlatform.system;
 in {
   home.username = "savvy";
   home.homeDirectory = "/home/savvy";
@@ -26,6 +26,7 @@ in {
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
     maple-mono.NF
+    teams-for-linux
   ];
 
   programs.gh = {

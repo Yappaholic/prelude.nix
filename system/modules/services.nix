@@ -14,20 +14,20 @@
         options = "grp:toggle,ctrl:nocaps";
       };
       windowManager.qtile = {
-        enable = true;
-        package = inputs.qtile.packages.${pkgs.system}.qtile;
+        enable = false;
+        package = inputs.qtile.packages.${pkgs.stdenv.hostPlatform.system}.qtile;
         extraPackages = python313Packages:
           with python313Packages; [
             pulsectl-asyncio
           ];
       };
       windowManager.xmonad = {
-        enable = false;
+        enable = true;
         enableContribAndExtras = true;
         config = null;
         enableConfiguredRecompile = true;
         haskellPackages = pkgs.haskell.packages.ghc984;
-        ghcArgs = ["-O2" "-fllvm"];
+        ghcArgs = ["-O2"];
       };
     };
 

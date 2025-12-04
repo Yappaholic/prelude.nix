@@ -22,11 +22,14 @@
     shellAbbrs = {
       nhs = "nh os switch";
       nht = "nh os test";
-      ls = "eza --color=always --icons=always";
-      la = "eza -la --color=always --icons=always";
       ff = "fastfetch";
       k = "kak";
       v = "nvim";
+    };
+    shellAliases = {
+      ls = "eza --color=always --icons=always";
+      ll = "eza -l --color=always --icons=always";
+      la = "eza -la --color=always --icons=always";
     };
     shellInitLast = ''
       fish_add_path ~/.cargo/bin

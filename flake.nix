@@ -40,7 +40,7 @@
     mango,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
+    system = "x86-64-linux";
     pkgs = import nixpkgs {inherit system;};
   in {
     nixosConfigurations.mirl = nixpkgs.lib.nixosSystem {

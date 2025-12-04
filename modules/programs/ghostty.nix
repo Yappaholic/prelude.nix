@@ -4,7 +4,7 @@
     installBatSyntax = true;
     systemd.enable = true;
     settings = {
-      theme = "Tomorrow Night Burns";
+      theme = "Rose Pine";
       font-size = 16;
       font-family = "Maple Mono NF";
       shell-integration = "fish";
