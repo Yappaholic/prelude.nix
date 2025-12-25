@@ -29,11 +29,11 @@ in {
       experimental-features = ["nix-command" "flakes"];
       substituters = lib.mkForce [
         "https://nixos-cache-proxy.cofob.dev"
-        "https://chaotic-nyx.cachix.org"
+        "https://attic.xuyh0120.win/lantian"
       ];
       trusted-public-keys = [
-        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       ];
     };
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -72,5 +72,7 @@ in {
     neovim-git
     git
     home-manager
+    clang
+    clang-tools
   ];
 }

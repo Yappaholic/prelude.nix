@@ -10,7 +10,7 @@ in {
   home.homeDirectory = "/home/savvy";
   home.stateVersion = "24.05";
   imports = [
-    #./modules/editors/helix.nix
+    ./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
     #./modules/shell/nushell.nix
@@ -26,7 +26,6 @@ in {
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
     maple-mono.NF
-    teams-for-linux
   ];
 
   programs.gh = {
@@ -77,7 +76,7 @@ in {
   wayland = {
     windowManager = {
       hyprland = {
-        enable = true;
+        enable = false;
         plugins = with pkgs.hyprlandPlugins; [hy3];
         settings = import ./modules/wm/hyprland/config.nix;
         systemd.enable = true;
@@ -88,9 +87,10 @@ in {
         checkConfig = false;
         config = import ./modules/wm/sway/config.nix {inherit lib;};
         extraConfig = ''
-          layout_default_width 1.0
-          layout_width [0.5, 0.8, 1.0]
-          maximize_if_single true
+          corner_radius 4
+          blur enable
+          blur_xray disable
+          titlebar_separator disable
         '';
       };
     };

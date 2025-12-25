@@ -28,23 +28,18 @@ in {
       vscode-langservers-extracted
       #bash-env-nushell
       nixd
-      gcc15
-      rustup
-      clang-tools
+      rust-analyzer
+      rustc
+      cargo
       #godot-mono
       man-pages
       man-pages-posix
-
-      # Editors and text
-      kakoune-unwrapped
-      kakoune-lsp
+      evil-helix
 
       # Window managers and desktop
       ## X11
-      xmobar
-      xdotool
+      polybar
       feh
-      trayer
       xclip
       ## Other
       ghostty

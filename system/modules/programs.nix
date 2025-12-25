@@ -2,19 +2,15 @@
   programs = {
     steam = {
       enable = true;
-      extraCompatPackages = with pkgs; [
-        proton-cachyos_x86_64_v3
-        proton-ge-custom
-      ];
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true;
     };
 
     # Window Managers
-    hyprland.enable = true;
+    hyprland.enable = false;
     sway = {
-      enable = false;
+      enable = true;
       package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
       extraOptions = ["--unsupported-gpu"];
@@ -25,8 +21,8 @@
       ];
     };
     niri = {
-      enable = false;
-      package = pkgs.niri_git;
+      enable = true;
+      package = pkgs.niri;
     };
     mango.enable = true;
     xwayland = {

@@ -2,7 +2,7 @@
   menu = "wmenu-run";
   browser = "zen";
   mod = "Mod4";
-  terminal = "kitty";
+  terminal = "ghostty";
 in {
   modifier = "Mod4";
   defaultWorkspace = "workspace number 1";
@@ -31,17 +31,15 @@ in {
   keybindings = lib.mkOptionDefault {
     #Apps
     "${mod}+Return" = "exec ${terminal}";
-    "${mod}+Space" = "exec ${menu}";
-    "${mod}+t" = "exec ${browser}";
+    "${mod}+space" = "exec ${menu}";
+    "${mod}+b" = "exec ${browser}";
     "${mod}+e" = "exec emacsclient -c";
     # System
     "${mod}+q" = "kill";
-    "${mod}+d" = "layout stacking";
+    "${mod}+t" = "layout stacking";
     "${mod}+Shift+c" = "reload";
     "${mod}+Shift+minus" = "move scratchpad";
     "${mod}+minus" = "scratchpad show";
-    "${mod}+r" = "cycle_size h next";
-    "${mod}+o" = "jump";
   };
 
   gaps = {
@@ -72,5 +70,6 @@ in {
   ];
   startup = [
     {command = "systemctl --user start gammastep";}
+    {command = "autotiling-rs";}
   ];
 }

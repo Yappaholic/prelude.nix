@@ -51,7 +51,7 @@ in {
       "node_modules/"
     ];
     settings = {
-      theme = "kanagawa";
+      theme = "kanagawa-dragon";
       editor = {
         line-number = "relative";
         mouse = false;

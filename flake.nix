@@ -2,8 +2,8 @@
   description = "Nixos config flake";
 
   inputs = {
+    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     yt-x = {
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +36,7 @@
   outputs = {
     nixpkgs,
     home-manager,
-    chaotic,
+    cachyos-kernel,
     mango,
     ...
   } @ inputs: let
@@ -50,7 +50,6 @@
         ./system/desktop.nix
         home-manager.nixosModules.home-manager
         mango.nixosModules.mango
-        chaotic.nixosModules.default
         {
           home-manager.useUserPackages = true;
           home-manager.users.savvy = import ./home.nix;
