@@ -59,6 +59,22 @@
         }
       ];
     };
+    nixosConfigurations.lmirl = nixpkgs.lib.nixosSystem {
+      system = system;
+      specialArgs = {inherit inputs;};
+      modules = [
+        ./system/laptop.nix
+        home-manager.nixosModules.home-manager
+        mango.nixosModules.mango
+        {
+          home-manager.useUserPackages = true;
+          home-manager.users.savvy = import ./home.nix;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+          };
+        }
+      ];
+    };
     homeConfigurations.savvy = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
