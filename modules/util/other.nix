@@ -4,6 +4,10 @@
     enableZshIntegration = true;
     # enableNushellIntegration = true;
   };
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
   programs.carapace = {
     enable = true;
     enableZshIntegration = true;

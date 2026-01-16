@@ -44,7 +44,10 @@
     };
 
     # Misc
-    java.enable = true;
+    java = {
+      enable = true;
+      package = pkgs.jdk25;
+    };
     dconf.enable = true;
     gnupg.agent = {
       enable = true;

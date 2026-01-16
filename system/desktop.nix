@@ -6,16 +6,29 @@
   pkgs,
   inputs,
   ...
-}: {
+}: let
+  modules = {
+    user = import ./modules/user.nix {
+      inherit pkgs;
+      inherit inputs;
+      additional-packages = with pkgs; [
+        lutris
+        protonup-qt
+        wineWow64Packages.waylandFull
+        gamescope
+      ];
+    };
+  };
+in {
   imports = [
     # Split configuration
     ./modules/boot.nix
     ./modules/programs.nix
     ./modules/services.nix
     ./modules/other.nix
-    ./modules/user.nix
     # Include hardware scan
     ./hardware-desktop.nix
+    modules.user
     # Use home-manager
     inputs.home-manager.nixosModules.default
   ];
@@ -26,6 +39,11 @@
     /Windows
     protocol: efi
     path: uuid(4d96f285-5db8-11f0-95ec-1c1b0d09ace4):/EFI/Microsoft/Boot/bootmgfw.efi
+    /Gentoo
+    protocol: linux
+    path: uuid(1f4a26c9-dd2c-43f9-a0a1-5d715198851c):/boot/linux-6.18.1-bzImage
+    module_path: uuid(1f4a26c9-dd2c-43f9-a0a1-5d715198851c):/boot/linux-6.18.1-initrd
+    cmdline: root=UUID=4971dfa0-d2ad-45ea-b22f-7da1f5afd963 rootfstype=btrfs rw nvidia-drm.fbdev=1
   '';
   services.xserver = {
     xkb.variant = "colemak_dh_wide_iso,";
@@ -42,6 +60,12 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
+  };
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true;
   };
 
   # This value determines the NixOS release from which the default

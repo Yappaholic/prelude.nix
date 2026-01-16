@@ -10,7 +10,7 @@ in {
   home.homeDirectory = "/home/savvy";
   home.stateVersion = "24.05";
   imports = [
-    ./modules/editors/helix.nix
+    #./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
     #./modules/shell/nushell.nix

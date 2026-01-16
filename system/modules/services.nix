@@ -14,7 +14,7 @@
         options = "grp:toggle,ctrl:nocaps";
       };
       windowManager.qtile = {
-        enable = false;
+        enable = true;
         package = inputs.qtile.packages.${pkgs.stdenv.hostPlatform.system}.qtile;
         extraPackages = python313Packages:
           with python313Packages; [
@@ -22,7 +22,7 @@
           ];
       };
       windowManager.xmonad = {
-        enable = true;
+        enable = false;
         enableContribAndExtras = true;
         config = null;
         enableConfiguredRecompile = true;

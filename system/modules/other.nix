@@ -11,7 +11,6 @@ in {
     enable = true;
     priority = 10;
     algorithm = "lz4";
-    memoryPercent = 150;
   };
   # Disable IPV6 and use Google nameservers
   networking = {
