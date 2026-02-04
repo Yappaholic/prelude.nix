@@ -28,11 +28,11 @@ in {
       experimental-features = ["nix-command" "flakes"];
       substituters = lib.mkForce [
         "https://nixos-cache-proxy.cofob.dev"
-        "https://attic.xuyh0120.win/lantian"
+        #"https://attic.xuyh0120.win/lantian"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-        "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+        #"lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
       ];
     };
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];

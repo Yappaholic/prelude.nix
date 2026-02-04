@@ -12,7 +12,7 @@ in {
     isNormalUser = true;
     description = "Nixyy";
     shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "kvm" "adbusers"];
     packages = with pkgs;
       additional-packages
       ++ [
@@ -36,6 +36,7 @@ in {
         nixd
         rust-analyzer
         rustc
+        rustfmt
         cargo
         #godot-mono
         man-pages
@@ -68,7 +69,7 @@ in {
         # CLI tools
         nix-your-shell
         nurl
-        gitu
+        #gitu
         pass-wayland
         bc
         mpv

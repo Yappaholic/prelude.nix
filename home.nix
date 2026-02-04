@@ -17,6 +17,7 @@ in {
     ./modules/shell/fish.nix
     ./modules/programs/ghostty.nix
     ./modules/wm/mango.nix
+    ./modules/editors/zed.nix
     #./modules/programs/qutebrowser.nix
     #./modules/shell/zsh.nix
     inputs.mango.hmModules.mango

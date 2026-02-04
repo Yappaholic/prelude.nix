@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   # Bootloader.
   boot = {
     loader.limine = {
@@ -8,6 +12,6 @@
     };
     loader.efi.canTouchEfiVariables = true;
     binfmt.emulatedSystems = ["aarch64-linux"];
-    #kernelPackages = inputs.cachyos-kernel.legacyPackages.x86_64-linux.linuxPackages-cachyos-latest-lto;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 }

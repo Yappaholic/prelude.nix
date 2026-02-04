@@ -12,7 +12,7 @@
       inherit pkgs;
       inherit inputs;
       additional-packages = with pkgs; [
-        lutris
+        heroic
         protonup-qt
         wineWow64Packages.waylandFull
         gamescope
@@ -50,9 +50,10 @@ in {
     videoDrivers = ["nvidia"];
   };
 
-  hardware.graphics = {
+  hardware.graphics = with pkgs; {
     enable = true;
-    extraPackages = with pkgs; [libvdpau-va-gl];
+    enable32Bit = true;
+    extraPackages = [libvdpau-va-gl];
   };
 
   hardware.nvidia = {
@@ -67,6 +68,7 @@ in {
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true;
   };
+  virtualisation.waydroid.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

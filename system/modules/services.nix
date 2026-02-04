@@ -14,7 +14,7 @@
         options = "grp:toggle,ctrl:nocaps";
       };
       windowManager.qtile = {
-        enable = true;
+        enable = false;
         package = inputs.qtile.packages.${pkgs.stdenv.hostPlatform.system}.qtile;
         extraPackages = python313Packages:
           with python313Packages; [
@@ -56,6 +56,7 @@
       enable = true;
       alsa.enable = true;
       pulse.enable = true;
+      wireplumber.enable = true;
     };
 
     # Need for authentication
