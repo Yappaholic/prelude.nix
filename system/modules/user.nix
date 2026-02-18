@@ -16,22 +16,16 @@ in {
     packages = with pkgs;
       additional-packages
       ++ [
-        # Programming languages
         clang
-        ccls
+        clang-tools
+        gopls
+        gofumpt
+        # Programming languages
         zig
         zls
-        haskell-language-server
         alejandra
         odin
         ols
-        go
-        gopls
-        gofumpt
-        bun
-        jdt-language-server
-        typescript-language-server
-        vscode-langservers-extracted
         #bash-env-nushell
         nixd
         rust-analyzer
@@ -41,13 +35,12 @@ in {
         #godot-mono
         man-pages
         man-pages-posix
-        evil-helix
 
         # Window managers and desktop
         ## X11
-        polybar
-        feh
-        xclip
+        #polybar
+        #feh
+        #xclip
         ## Other
         ghostty
         waybar
@@ -61,10 +54,15 @@ in {
         #vistafonts
         #viber
         xdg-utils
-        youtube-music
+        #youtube-music
         vesktop
         wmenu
-        discord
+
+        # Editors
+        kakoune
+        kakoune-lsp
+        kak-tree-sitter-unwrapped
+        emacs-lsp-booster
 
         # CLI tools
         nix-your-shell

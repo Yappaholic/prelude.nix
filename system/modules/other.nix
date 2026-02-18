@@ -71,7 +71,5 @@ in {
     neovim-git
     git
     home-manager
-    clang
-    clang-tools
   ];
 }

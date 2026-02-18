@@ -48,7 +48,6 @@
       enable = true;
       package = pkgs.jdk25;
     };
-    adb.enable = true;
     dconf.enable = true;
     gnupg.agent = {
       enable = true;

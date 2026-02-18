@@ -10,15 +10,15 @@ in {
   home.homeDirectory = "/home/savvy";
   home.stateVersion = "24.05";
   imports = [
-    #./modules/editors/helix.nix
+    ./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
     #./modules/shell/nushell.nix
     ./modules/shell/fish.nix
     ./modules/programs/ghostty.nix
     ./modules/wm/mango.nix
-    ./modules/editors/zed.nix
-    #./modules/programs/qutebrowser.nix
+    #./modules/editors/zed.nix
+    ./modules/programs/qutebrowser.nix
     #./modules/shell/zsh.nix
     inputs.mango.hmModules.mango
     inputs.zen-browser.homeModules.beta
@@ -83,7 +83,7 @@ in {
         systemd.enable = true;
       };
       sway = {
-        enable = true;
+        enable = false;
         package = null;
         checkConfig = false;
         config = import ./modules/wm/sway/config.nix {inherit lib;};
@@ -104,6 +104,11 @@ in {
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+  home.file.".cargo/config.toml".text = ''
+    [target.'cfg(target_os = "linux")']
+    rustflags = ["-C", "link-arg=-fuse-ld=${pkgs.mold}/bin/mold"]
+  '';
 
   programs.home-manager.enable = true;
 }

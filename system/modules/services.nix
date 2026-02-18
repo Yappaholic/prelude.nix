@@ -42,7 +42,7 @@
 
     # Emacs with packages and daemon
     emacs = {
-      enable = false;
+      enable = true;
       install = true;
       package = with pkgs; (
         (emacsPackagesFor emacs-pgtk).emacsWithPackages (

@@ -18,14 +18,6 @@
     language-servers = ["c3-lsp"];
     scope = "source.c3";
   };
-  onyx = {
-    name = "onyx";
-    file-types = ["onyx"];
-    grammar = "odin";
-    scope = "source.onyx";
-    roots = ["onyx-pkg.kdl"];
-    language-servers = ["onyx-lsp"];
-  };
   nix = {
     name = "nix";
     file-types = ["nix"];
@@ -43,21 +35,24 @@
 in {
   programs.helix = {
     enable = true;
-    package = pkgs.evil-helix;
+    package = pkgs.helix;
     ignores = [
       ".build/"
       "build"
       "bundle/"
       "node_modules/"
+      "target"
+      "zig-out"
+      ".direnv"
+      ".git"
     ];
     settings = {
-      theme = "kanagawa-dragon";
+      theme = "ashen";
       editor = {
         line-number = "relative";
         mouse = false;
         completion-timeout = 5;
         lsp.display-messages = true;
-        end-of-line-diagnostics = "hint";
         inline-diagnostics.cursor-line = "error";
         file-picker.hidden = false;
         cursor-shape = {
@@ -107,14 +102,13 @@ in {
           "odin"
         ];
       };
-      language = [typescript c3 nix onyx];
+      language = [typescript c3 nix];
       grammar = [c3-grammar];
       language-server.c3-lsp = {
         command = "c3-lsp";
       };
-      language-server.onyx-lsp = {
-        command = "onyx";
-        args = ["lsp"];
+      language-server.ccls = {
+        command = "ccls";
       };
       language-server.nixd = {
         command = "nixd";

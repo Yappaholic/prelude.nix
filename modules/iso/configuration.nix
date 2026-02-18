@@ -14,7 +14,7 @@ in {
   ];
   nixpkgs.hostPlatform = "x86_64-linux";
   environment.systemPackages = with pkgs; [
-    firefox
+    #firefox
     git
     nodejs_latest
     bun
