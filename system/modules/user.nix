@@ -6,18 +6,22 @@
 }: let
   system = pkgs.stdenv.hostPlatform.system;
   yt-x = inputs.yt-x.packages.${system}.default;
+  ols-git = pkgs.ols.overrideAttrs (_: _: {
+    version = "${inputs.ols-src.shortRev or "nightly"}";
+    src = inputs.ols-src;
+  });
 in {
   # My user account
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.fish;
+    shell = pkgs.bash;
     extraGroups = ["networkmanager" "wheel" "kvm" "adbusers"];
     packages = with pkgs;
       additional-packages
       ++ [
-        clang
         clang-tools
+        clang
         gopls
         gofumpt
         # Programming languages
@@ -25,13 +29,14 @@ in {
         zls
         alejandra
         odin
-        ols
+        ols-git
         #bash-env-nushell
         nixd
-        rust-analyzer
-        rustc
-        rustfmt
-        cargo
+        rustup
+        #rust-analyzer
+        #rustc
+        #rustfmt
+        #cargo
         #godot-mono
         man-pages
         man-pages-posix
@@ -42,10 +47,13 @@ in {
         #feh
         #xclip
         ## Other
+        brave
         ghostty
         waybar
         wlsunset
         wl-clipboard
+        grim
+        slurp
         swww
         telegram-desktop
         wlogout

@@ -8,9 +8,9 @@
     };
 
     # Window Managers
-    hyprland.enable = false;
+    hyprland.enable = true;
     sway = {
-      enable = true;
+      enable = false;
       package = pkgs.swayfx;
       wrapperFeatures.gtk = true;
       extraOptions = ["--unsupported-gpu"];
@@ -36,6 +36,11 @@
       loginShellInit = ''export PATH=/opt/bin:$PATH'';
     };
     fish.enable = true;
+    bash.interactiveShellInit = ''
+      if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
+        exec nu
+      fi
+    '';
 
     # Utilities
     nh = {

@@ -12,6 +12,6 @@
     };
     loader.efi.canTouchEfiVariables = true;
     binfmt.emulatedSystems = ["aarch64-linux"];
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
   };
 }
