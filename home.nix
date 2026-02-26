@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  system = pkgs.stdenv.hostPlatform.system;
+  #system = pkgs.stdenv.hostPlatform.system;
 in {
   home.username = "savvy";
   home.homeDirectory = "/home/savvy";
@@ -13,20 +13,24 @@ in {
     ./modules/editors/helix.nix
     ./modules/util/other.nix
     ./modules/util/gtk.nix
-    #./modules/shell/nushell.nix
+    ./modules/shell/nushell.nix
     ./modules/shell/fish.nix
     ./modules/programs/ghostty.nix
+    ./modules/programs/waybar.nix
     ./modules/wm/mango.nix
     #./modules/editors/zed.nix
     ./modules/programs/qutebrowser.nix
     #./modules/shell/zsh.nix
     inputs.mango.hmModules.mango
-    inputs.zen-browser.homeModules.beta
+    inputs.ironbar.homeManagerModules.default
+    ./modules/programs/ironbar.nix
+    #inputs.zen-browser.homeModules.beta
   ];
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     nerd-fonts.monaspace
     maple-mono.NF
+    noto-fonts
   ];
 
   programs.gh = {
@@ -69,7 +73,7 @@ in {
       herbstluftwm = import ./modules/wm/herbsluftwm/config.nix {pkgs = pkgs;};
     };
   };
-  programs.zen-browser.enable = true;
+  #programs.zen-browser.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -77,9 +81,11 @@ in {
   wayland = {
     windowManager = {
       hyprland = {
-        enable = false;
-        plugins = with pkgs.hyprlandPlugins; [hy3];
+        enable = true;
         settings = import ./modules/wm/hyprland/config.nix;
+        plugins = with pkgs; [
+          hyprlandPlugins.hy3
+        ];
         systemd.enable = true;
       };
       sway = {
