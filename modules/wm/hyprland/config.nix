@@ -1,7 +1,7 @@
 {
   "$mainMod" = "SUPER";
   "$terminal" = "ghostty";
-  "$browser" = "zen";
+  "$browser" = "brave";
   "$menu" = "wmenu-run";
   "$logout" = "wlogout";
 
@@ -15,7 +15,7 @@
   exec-once = [
     "swww-daemon"
     "swww img ~/Pictures/wallpaper.jpg"
-    "waybar"
+    "ironbar"
   ];
   general = {
     gaps_in = 5;
@@ -33,7 +33,16 @@
     # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on;
     allow_tearing = false;
 
-    layout = "dwindle";
+    layout = "hy3";
+  };
+  plugin.hy3 = {
+    tabs = {
+      blur = false;
+      opacity = 1.0;
+    };
+    autotile = {
+      enable = true;
+    };
   };
 
   # https://wiki.hyprland.org/Configuring/Variables/#decoration
@@ -94,7 +103,7 @@
 
   # https://wiki.hyprland.org/Configuring/Variables/#input
   input = {
-    kb_layout = "us, ru";
+    kb_layout = "us,ru";
     kb_variant = "colemak_dh_wide_iso,";
     kb_options = "ctrl:nocaps,grp:toggle";
 
@@ -102,7 +111,7 @@
 
     sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
 
-    repeat_delay = 300;
+    repeat_delay = 200;
     repeat_rate = 50;
   };
 
@@ -113,7 +122,7 @@
   # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
   bind = [
     "$mainMod, Return, exec, $terminal"
-    "$mainMod, Q, killactive,"
+    "$mainMod, Q, hy3:killactive,"
     "$mainMod SHIFT, E, exit,"
     "$mainMod, E, exec, emacsclient -c"
     "$mainMod, M, exec, $logout"
@@ -121,15 +130,22 @@
     "$mainMod, P, togglefloating,"
     "$mainMod, Space, exec, $menu"
 
-    "$mainMod, h, movefocus, l"
-    "$mainMod, l, movefocus, r"
-    "$mainMod, k, movefocus, u"
-    "$mainMod, j, movefocus, d"
+    "$mainMod, w, hy3:changegroup, toggletab"
 
-    "$mainMod SHIFT, h, movewindow, l"
-    "$mainMod SHIFT, l, movewindow, r"
-    "$mainMod SHIFT, k, movewindow, u"
-    "$mainMod SHIFT, j, movewindow, d"
+    "$mainMod, h, hy3:movefocus, l"
+    "$mainMod, l, hy3:movefocus, r"
+    "$mainMod, k, hy3:movefocus, u"
+    "$mainMod, j, hy3:movefocus, d"
+
+    "$mainMod SHIFT, h, hy3:movefocus, l, visible"
+    "$mainMod SHIFT, l, hy3:movefocus, r, visible"
+    "$mainMod SHIFT, k, hy3:movefocus, u, visible"
+    "$mainMod SHIFT, j, hy3:movefocus, d, visible"
+
+    "$mainMod CONTROL, h, hy3:movewindow, l"
+    "$mainMod CONTROL, l, hy3:movewindow, r"
+    "$mainMod CONTROL, k, hy3:movewindow, u"
+    "$mainMod CONTROL, j, hy3:movewindow, d"
 
     "$mainMod, 1, workspace, 1"
     "$mainMod, 2, workspace, 2"
@@ -137,11 +153,11 @@
     "$mainMod, 4, workspace, 4"
     "$mainMod, 5, workspace, 5"
 
-    "$mainMod SHIFT, 1, movetoworkspace, 1"
-    "$mainMod SHIFT, 2, movetoworkspace, 2"
-    "$mainMod SHIFT, 3, movetoworkspace, 3"
-    "$mainMod SHIFT, 4, movetoworkspace, 4"
-    "$mainMod SHIFT, 5, movetoworkspace, 5"
+    "$mainMod SHIFT, 1, hy3:movetoworkspace, 1"
+    "$mainMod SHIFT, 2, hy3:movetoworkspace, 2"
+    "$mainMod SHIFT, 3, hy3:movetoworkspace, 3"
+    "$mainMod SHIFT, 4, hy3:movetoworkspace, 4"
+    "$mainMod SHIFT, 5, hy3:movetoworkspace, 5"
 
     "$mainMod, S, togglespecialworkspace, 5"
     "$mainMod SHIFT, S, movetoworkspace, special:5"
@@ -156,10 +172,20 @@
   ];
 
   # Ignore maximize requests from apps. You'll probably like this.
-  windowrulev2 = [
-    "suppressevent maximize, class:.*"
+  windowrule = [
+    "suppress_event maximize, match:class .*"
 
     # Fix some dragging issues with XWayland
-    "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+    "no_focus true,match:class ^$,match:title ^$,match:xwayland 1,match:float 0,match:fullscreen 0,match:pin 0"
+
+    # Smart gaps
+    "border_size 0, match:float 0, match:workspace w[tv1]"
+    "rounding 0, match:float 0, match:workspace w[tv1]"
+    "border_size 0, match:float 0, match:workspace f[1]"
+    "rounding 0, match:float 0, match:workspace f[1]"
+  ];
+  workspace = [
+    "w[tv1], gapsout:0, gapsin:0"
+    "f[1], gapsout:0, gapsin:0"
   ];
 }

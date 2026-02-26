@@ -2,6 +2,7 @@
   wayland.windowManager.mango = {
     enable = true;
     settings = ''
+      exec-once=~/.config/mango/autostart.sh
       # Window effect
       blur=0
       blur_layer=0
@@ -23,9 +24,9 @@
       shadowscolor= 0x000000ff
 
       border_radius=6
-      no_radius_when_single=1
+      no_radius_when_single=0
       focused_opacity=1.0
-      unfocused_opacity=0.9
+      unfocused_opacity=1.0
 
       # Animation Configuration(support type:zoom,slide)
       # tag_animation_direction: 0-horizontal,1-vertical
@@ -64,7 +65,7 @@
       new_is_master=0
       default_mfact=0.50
       default_nmaster=1
-      smartgaps=1
+      smartgaps=0
 
       # Overview Setting
       hotarea_size=10
@@ -74,11 +75,11 @@
       overviewgappo=30
 
       # Misc
-      no_border_when_single=1
+      no_border_when_single=0
       axis_bind_apply_timeout=100
       focus_on_activate=1
-      inhibit_regardless_of_visibility=0
       sloppyfocus=1
+      syncobj_enable=1
       warpcursor=1
       focus_cross_monitor=0
       focus_cross_tag=0
@@ -150,9 +151,11 @@
       # menu and terminal
       binds=SUPER,space,spawn, wmenu-run
       binds=SUPER,Return,spawn,ghostty
+      binds=SUPER,y,spawn_shell,grim -g "$(slurp)"
 
       # exit
-      binds=SUPER,m,quit
+      binds=SUPER+SHIFT,m,quit
+      binds=SUPER,m,spawn,wlogout
       binds=SUPER,q,killclient,
 
       # switch window focus
@@ -217,8 +220,6 @@
       # NONE mode key only work in ov mode
       mousebind=SUPER,btn_left,moveresize,curmove
       mousebind=SUPER,btn_right,moveresize,curresize
-      mousebind=NONE,btn_left,toggleoverview,1
-      mousebind=NONE,btn_right,killclient,0
 
       # layer rule
       layerrule=animation_type_open:zoom,layer_name:rofi
@@ -228,7 +229,7 @@
       waybar &
       systemctl --user start gammastep &
       ${pkgs.swww}/bin/swww-daemon
-      ${pkgs.swww}/bin/swww img ~/Pictures/wallpaper.png
+      ${pkgs.swww}/bin/swww img ~/Pictures/wallpaper.jpg
     '';
   };
 }

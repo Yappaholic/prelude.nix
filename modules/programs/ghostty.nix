@@ -4,10 +4,9 @@
     installBatSyntax = true;
     systemd.enable = true;
     settings = {
-      theme = "Kanagawa Dragon";
+      theme = "Tomorrow Night Burns";
       font-size = 16;
       font-family = "Maple Mono NF";
-      shell-integration = "fish";
       shell-integration-features = true;
       confirm-close-surface = false;
       window-decoration = false;
@@ -25,10 +24,15 @@
         "alt+c=reload_config"
         "alt+x=close_surface"
 
-        "all:alt+1=unbind"
-        "all:alt+2=unbind"
-        "all:alt+3=unbind"
-        "all:alt+4=unbind"
+        "alt+1=unbind"
+        "alt+2=unbind"
+        "alt+3=unbind"
+        "alt+4=unbind"
+
+        "alt+digit_1=unbind"
+        "alt+digit_2=unbind"
+        "alt+digit_3=unbind"
+        "alt+digit_4=unbind"
       ];
     };
   };
