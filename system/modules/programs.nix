@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: let
+  niri-config = import ./niri.nix {inherit pkgs;};
+in {
   programs = {
     steam = {
       enable = true;
@@ -22,7 +28,7 @@
     };
     niri = {
       enable = true;
-      package = pkgs.niri;
+      package = inputs.wrappers.wrappers.niri.wrap niri-config;
     };
     mango.enable = true;
     xwayland = {
@@ -36,11 +42,6 @@
       loginShellInit = ''export PATH=/opt/bin:$PATH'';
     };
     fish.enable = true;
-    bash.interactiveShellInit = ''
-      if ! [ "$TERM" = "dumb" ] && [ -z "$BASH_EXECUTION_STRING" ]; then
-        exec nu
-      fi
-    '';
 
     # Utilities
     nh = {
