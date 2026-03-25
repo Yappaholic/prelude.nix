@@ -22,9 +22,7 @@ in {
     ./modules/programs/qutebrowser.nix
     #./modules/shell/zsh.nix
     inputs.mango.hmModules.mango
-    inputs.ironbar.homeManagerModules.default
-    ./modules/programs/ironbar.nix
-    #inputs.zen-browser.homeModules.beta
+    inputs.zen-browser.homeModules.beta
   ];
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -73,7 +71,7 @@ in {
       herbstluftwm = import ./modules/wm/herbsluftwm/config.nix {pkgs = pkgs;};
     };
   };
-  #programs.zen-browser.enable = true;
+  programs.zen-browser.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -82,7 +80,7 @@ in {
     windowManager = {
       hyprland = {
         enable = true;
-        settings = import ./modules/wm/hyprland/config.nix;
+        settings = import ./modules/wm/hyprland/config.nix {inherit pkgs;};
         plugins = with pkgs; [
           hyprlandPlugins.hy3
         ];
