@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   "$mainMod" = "SUPER";
   "$terminal" = "ghostty";
   "$browser" = "brave";
@@ -13,9 +13,8 @@
   ];
 
   exec-once = [
-    "swww-daemon"
-    "swww img ~/Pictures/wallpaper.jpg"
-    "ironbar"
+    "${pkgs.noctalia-shell}/bin/noctalia-shell"
+    "systemctl --user restart gammastep"
   ];
   general = {
     gaps_in = 5;
@@ -33,7 +32,7 @@
     # Please see https://wiki.hyprland.org/Configuring/Tearing/ before you turn this on;
     allow_tearing = false;
 
-    layout = "hy3";
+    layout = "scrolling";
   };
   plugin.hy3 = {
     tabs = {
@@ -90,6 +89,10 @@
   master = {
     new_status = "master";
   };
+  scrolling = {
+    fullscreen_on_one_column = true;
+    column_width = 0.5;
+  };
 
   # https://wiki.hyprland.org/Configuring/Variables/#misc
   misc = {
@@ -122,30 +125,41 @@
   # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
   bind = [
     "$mainMod, Return, exec, $terminal"
-    "$mainMod, Q, hy3:killactive,"
+    "$mainMod, Q, killactive"
     "$mainMod SHIFT, E, exit,"
     "$mainMod, E, exec, emacsclient -c"
-    "$mainMod, M, exec, $logout"
+    "$mainMod SHIFT, M, exec, ${pkgs.noctalia-shell}/bin/noctalia-shell ipc call sessionMenu toggle"
     "$mainMod, F, fullscreen, 1"
     "$mainMod, P, togglefloating,"
-    "$mainMod, Space, exec, $menu"
+    "$mainMod, Space, exec, ${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle"
 
-    "$mainMod, w, hy3:changegroup, toggletab"
+    "$mainMod, h, movefocus, l"
+    "$mainMod, l, movefocus, r"
+    "$mainMod, k, movefocus, u"
+    "$mainMod, j, movefocus, d"
 
-    "$mainMod, h, hy3:movefocus, l"
-    "$mainMod, l, hy3:movefocus, r"
-    "$mainMod, k, hy3:movefocus, u"
-    "$mainMod, j, hy3:movefocus, d"
+    "$mainMod, W, togglegroup"
+    "$mainMod, Tab, changegroupactive"
+    "$mainMod SHIFT, h, movewindoworgroup, l"
+    "$mainMod SHIFT, l, movewindoworgroup, r"
+    "$mainMod SHIFT, k, movewindoworgroup, u"
+    "$mainMod SHIFT, j, movewindoworgroup, d"
 
-    "$mainMod SHIFT, h, hy3:movefocus, l, visible"
-    "$mainMod SHIFT, l, hy3:movefocus, r, visible"
-    "$mainMod SHIFT, k, hy3:movefocus, u, visible"
-    "$mainMod SHIFT, j, hy3:movefocus, d, visible"
+    "$mainMod CONTROL, h, movewindow, l"
+    "$mainMod CONTROL, l, movewindow, r"
+    "$mainMod CONTROL, k, movewindow, u"
+    "$mainMod CONTROL, j, movewindow, d"
 
-    "$mainMod CONTROL, h, hy3:movewindow, l"
-    "$mainMod CONTROL, l, hy3:movewindow, r"
-    "$mainMod CONTROL, k, hy3:movewindow, u"
-    "$mainMod CONTROL, j, hy3:movewindow, d"
+    "$mainMod, equal, layoutmsg, colresize, +0.1"
+    "$mainMod, minus, layoutmsg, colresize, -0.1"
+    "$mainMod, R, layoutmsg, colresize, +conf"
+
+    "$mainMod, comma, layoutmsg, cyclenext"
+    "$mainMod, dot, layoutmsg, cycleprev"
+
+    "$mainMod, D, exec, hyprctl keyword general:layout dwindle"
+    "$mainMod, M, exec, hyprctl keyword general:layout monocle"
+    "$mainMod, S, exec, hyprctl keyword general:layout scrolling"
 
     "$mainMod, 1, workspace, 1"
     "$mainMod, 2, workspace, 2"
@@ -153,14 +167,14 @@
     "$mainMod, 4, workspace, 4"
     "$mainMod, 5, workspace, 5"
 
-    "$mainMod SHIFT, 1, hy3:movetoworkspace, 1"
-    "$mainMod SHIFT, 2, hy3:movetoworkspace, 2"
-    "$mainMod SHIFT, 3, hy3:movetoworkspace, 3"
-    "$mainMod SHIFT, 4, hy3:movetoworkspace, 4"
-    "$mainMod SHIFT, 5, hy3:movetoworkspace, 5"
+    "$mainMod CONTROL, 1, movetoworkspace, 1"
+    "$mainMod CONTROL, 2, movetoworkspace, 2"
+    "$mainMod CONTROL, 3, movetoworkspace, 3"
+    "$mainMod CONTROL, 4, movetoworkspace, 4"
+    "$mainMod CONTROL, 5, movetoworkspace, 5"
 
-    "$mainMod, S, togglespecialworkspace, 5"
-    "$mainMod SHIFT, S, movetoworkspace, special:5"
+    "$mainMod, G, togglespecialworkspace, 5"
+    "$mainMod SHIFT, G, movetoworkspace, special:5"
     "$mainMod, mouse_down, workspace, e+1"
     "$mainMod, mouse_up, workspace, e-1"
   ];
