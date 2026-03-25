@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  noctalia-shell = "${pkgs.noctalia-shell}/bin/noctalia-shell";
+in {
   wayland.windowManager.mango = {
     enable = true;
     settings = ''
@@ -80,6 +82,7 @@
       focus_on_activate=1
       sloppyfocus=1
       syncobj_enable=1
+      allow_tearing=1
       warpcursor=1
       focus_cross_monitor=0
       focus_cross_tag=0
@@ -149,12 +152,12 @@
       binds=SUPER+SHIFT,c,reload_config
 
       # menu and terminal
-      binds=SUPER,space,spawn, wmenu-run
+      binds=SUPER,space,spawn_shell, ${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle
       binds=SUPER,Return,spawn,ghostty
       binds=SUPER,y,spawn_shell,grim -g "$(slurp)"
 
       # exit
-      binds=SUPER+SHIFT,m,quit
+      binds=SUPER+SHIFT,m, spawn_shell, ${pkgs.noctalia-shell}/bin/noctalia-shell ipc call sessionMenu toggle
       binds=SUPER,m,spawn,wlogout
       binds=SUPER,q,killclient,
 
@@ -224,12 +227,13 @@
       # layer rule
       layerrule=animation_type_open:zoom,layer_name:rofi
       layerrule=animation_type_close:zoom,layer_name:rofi
+
+      # window rules
+      windowrule=force_tearing:1,title:For Honor
     '';
     autostart_sh = ''
-      waybar &
+      ${pkgs.noctalia-shell}/bin/noctalia-shell
       systemctl --user start gammastep &
-      ${pkgs.swww}/bin/swww-daemon
-      ${pkgs.swww}/bin/swww img ~/Pictures/wallpaper.jpg
     '';
   };
 }
