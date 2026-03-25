@@ -9,7 +9,8 @@ in {
   # Set modern swap with 150% value ov RAM
   zramSwap = {
     enable = true;
-    priority = 10;
+    priority = 100;
+    memoryPercent = 100;
     algorithm = "lz4";
   };
   # Disable IPV6 and use Google nameservers
@@ -75,4 +76,7 @@ in {
   environment.shells = with pkgs; [
     nushell
   ];
+  environment.extraInit = ''
+    export WLR_DRM_NO_ATOMIC=1
+  '';
 }

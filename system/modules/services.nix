@@ -38,6 +38,12 @@
     # TUI display manager
     displayManager.ly = {
       enable = true;
+      settings = {
+        animation = "colormix";
+        colormix_col1 = "0x18181800";
+        colormix_col2 = "0x000000FF";
+        colormix_col3 = "0x20000000";
+      };
     };
 
     # Emacs with packages and daemon

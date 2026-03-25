@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  inherit pkgs;
   settings = {
     input = {
       keyboard = {
@@ -9,19 +10,19 @@
           variant = "colemak_dh_wide_iso,";
           options = "grp:toggle, ctrl:nocaps";
         };
+        numlock = null;
       };
-      numlock = null;
       focus-follows-mouse = null;
     };
     cursor = {
       xcursor-size = 24;
       xcursor-theme = "Adwaita";
       hide-when-typing = null;
-      hide-after-intactive-ms = 1000;
+      hide-after-inactive-ms = 1000;
     };
     layout = {
       tab-indicator = {
-        positon = "left";
+        position = "left";
         width = 4;
         gap = 4;
         place-within-column = null;
@@ -30,7 +31,17 @@
       };
       gaps = 8;
       center-focused-column = "on-overflow";
-      preset-column-widths.proportion = [0.5 0.8 1.0];
+      preset-column-widths = [
+        {
+          proportion = 0.5;
+        }
+        {
+          proportion = 0.8;
+        }
+        {
+          proportion = 1.0;
+        }
+      ];
       default-column-width.proportion = 0.5;
       focus-ring = {
         width = 4;
@@ -42,8 +53,9 @@
     screenshot-path = "~/Pictures/Screenshot/Screenshot from %Y-%m-%d %H-%M.png";
     binds = {
       "Mod+Shift+Slash".show-hotkey-overlay = null;
-      "Mod+Return".spawn-sh = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle";
       "Mod+Ctrl+E".spawn-sh = "emacsclient -c";
+      "Mod+Return".spawn = "ghostty";
+      "Mod+Space".spawn-sh = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call launcher toggle";
       "Mod+O".toggle-overview = null;
       "Mod+Q".close-window = null;
 
@@ -89,13 +101,18 @@
 
       "Mod+Minus".set-column-width = "-10%";
       "Mod+Equal".set-column-width = "+10%";
-      "Mod+Shift+Minus".set-column-height = "-10%";
-      "Mod+Shift+Equal".set-column-height = "+10%";
+      "Mod+Shift+Minus".set-window-height = "-10%";
+      "Mod+Shift+Equal".set-window-height = "+10%";
       "Mod+W".toggle-column-tabbed-display = null;
 
       "Mod+Y".screenshot = null;
-      "Mod+Shift+E".exit = null;
+      "Mod+Shift+E".quit = null;
       "Mod+E".spawn-sh = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call sessionMenu toggle";
     };
+    xwayland-satellite.path = pkgs.lib.getExe pkgs.xwayland-satellite;
+    spawn-at-startup = [
+      (pkgs.lib.getExe pkgs.noctalia-shell)
+      "systemctl --user restart gammastep"
+    ];
   };
 }

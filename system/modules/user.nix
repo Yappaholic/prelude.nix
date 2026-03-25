@@ -6,16 +6,14 @@
 }: let
   system = pkgs.stdenv.hostPlatform.system;
   yt-x = inputs.yt-x.packages.${system}.default;
-  ols-git = pkgs.ols.overrideAttrs (_: _: {
-    version = "${inputs.ols-src.shortRev or "nightly"}";
-    src = inputs.ols-src;
-  });
+  odin-git = inputs.odin-nightly.packages.${system}.default;
+  ols-git = inputs.odin-nightly.packages.${system}.ols;
 in {
   # My user account
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.bash;
+    shell = pkgs.fish;
     extraGroups = ["networkmanager" "wheel" "kvm" "adbusers"];
     packages = with pkgs;
       additional-packages
@@ -28,8 +26,6 @@ in {
         zig
         zls
         alejandra
-        odin
-        ols-git
         #bash-env-nushell
         nixd
         rustup
@@ -38,6 +34,8 @@ in {
         #rustfmt
         #cargo
         #godot-mono
+        odin-git
+        ols-git
         man-pages
         man-pages-posix
 
@@ -47,7 +45,6 @@ in {
         #feh
         #xclip
         ## Other
-        brave
         ghostty
         waybar
         wlsunset
