@@ -4,6 +4,7 @@
   inputs = {
     cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     yt-x = {
       url = "github:Benexl/yt-x";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +35,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    odin-nightly = {
+      url = "github:Yappaholic/odin-nightly";
+    };
   };
 
   outputs = {
@@ -53,6 +57,11 @@
         ./system/desktop.nix
         home-manager.nixosModules.home-manager
         mango.nixosModules.mango
+        {
+          nixpkgs.overlays = [
+            cachyos-kernel.overlays.pinned
+          ];
+        }
         {
           home-manager.useUserPackages = true;
           home-manager.users.savvy = import ./home.nix;
