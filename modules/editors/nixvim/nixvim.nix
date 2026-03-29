@@ -12,18 +12,6 @@
 in {
   programs.nixvim = {
     enable = true;
-    extraPlugins = [
-      (pkgs.vimUtils.buildVimPlugin
-        {
-          name = "vim-solarized8";
-          src = pkgs.fetchFromGitHub {
-            owner = "lifepillar";
-            repo = "vim-solarized8";
-            tag = "v1.5.1-neovim";
-            sha256 = "sha256-CngMHSYlZnfFwS0mAbNKahVrx9gKaD4MVZjRAsJtO3A=";
-          };
-        })
-    ];
     globals.mapleader = " ";
     performance = {
       byteCompileLua = {
@@ -44,8 +32,9 @@ in {
     };
     colorschemes = {
       melange.enable = false;
+      oxocarbon.enable = true;
       kanagawa = {
-        enable = true;
+        enable = false;
         settings = {
           compile = true;
           terminalColors = true;

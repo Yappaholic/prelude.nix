@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   inherit pkgs;
   settings = {
+    xwayland-satellite.path = pkgs.lib.getExe pkgs.xwayland-satellite;
+    prefer-no-csd = null;
+
     input = {
       keyboard = {
         repeat-rate = 30;
@@ -109,7 +112,6 @@
       "Mod+Shift+E".quit = null;
       "Mod+E".spawn-sh = "${pkgs.noctalia-shell}/bin/noctalia-shell ipc call sessionMenu toggle";
     };
-    xwayland-satellite.path = pkgs.lib.getExe pkgs.xwayland-satellite;
     spawn-at-startup = [
       (pkgs.lib.getExe pkgs.noctalia-shell)
       "systemctl --user restart gammastep"

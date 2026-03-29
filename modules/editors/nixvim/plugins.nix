@@ -6,8 +6,10 @@
   lsp = import ./lsp.nix {pkgs = pkgs;};
   dap-lldb = import ./dap.nix {pkgs = pkgs;};
   conform-nvim = import ./conform.nix;
+  blink-cmp = import ./blink.nix;
 in {
   inherit lsp;
+  inherit blink-cmp;
   dap = {
     enable = true;
     luaConfig.post = ''
@@ -34,11 +36,6 @@ in {
     enable = true;
     settings = {
       load = {
-        "core.completion" = {
-          config = {
-            engine = "nvim-cmp";
-          };
-        };
         "core.concealer" = {
           config = {
             icon_preset = "varied";
@@ -92,7 +89,6 @@ in {
       };
     };
   };
-  godot.enable = true;
   neogit.enable = true;
   project-nvim = {
     enable = true;
@@ -104,20 +100,23 @@ in {
   };
   treesitter = {
     enable = true;
-    luaConfig.post = ''
-      local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-            -- change the following as needed
-            parser_config.blade = {
-              install_info = {
-                url = "https://github.com/EmranMR/tree-sitter-blade",
-                files = {"src/parser.c"},
-                branch = "main",
-              },
-              filetype = "blade",
-            }
-    '';
     settings = {
-      ensureInstalled = "all";
+      ensureInstalled = [
+        "cpp"
+        "c"
+        "odin"
+        "markdown"
+        "zig"
+        "typescript"
+        "rust"
+        "make"
+        "cmake"
+        "meson"
+        "json"
+        "yaml"
+        "haskell"
+        "ocaml"
+      ];
       highlight = {
         enable = true;
       };
@@ -127,28 +126,25 @@ in {
   luasnip.enable = true;
   web-devicons.enable = true;
   inherit conform-nvim;
-  cmp = {
-    enable = true;
-    autoEnableSources = true;
-    settings.sources = [
-      {name = "nvim_lsp";}
-      {name = "path";}
-      {name = "buffer";}
-    ];
-    settings.mapping = {
-      __raw = ''
-        cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-o>'] = cmp.mapping.confirm({select = true}),
-          ['<C-c>'] = cmp.mapping.abort(),
-        })
-      '';
-    };
-  };
-  cmp-nvim-lsp.enable = true;
-  cmp-path.enable = true;
-  cmp-buffer.enable = true;
+  # cmp = {
+  #   enable = true;
+  #   autoEnableSources = true;
+  #   settings.sources = [
+  #     {name = "nvim_lsp";}
+  #     {name = "path";}
+  #     {name = "buffer";}
+  #   ];
+  #   settings.mapping = {
+  #     __raw = ''
+  #       cmp.mapping.preset.insert({
+  #         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+  #         ['<C-f>'] = cmp.mapping.scroll_docs(4),
+  #         ['<C-o>'] = cmp.mapping.confirm({select = true}),
+  #         ['<C-c>'] = cmp.mapping.abort(),
+  #       })
+  #     '';
+  #   };
+  # };
   dashboard.enable = true;
   nvim-autopairs.enable = true;
   harpoon = {

@@ -18,6 +18,7 @@
       markdown = ["prettierd"];
       nix = ["alejandra"];
       rust = ["rustfmt"];
+      odin = ["odinfmt"];
     };
   };
 }

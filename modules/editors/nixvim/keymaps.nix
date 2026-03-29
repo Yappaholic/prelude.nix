@@ -79,7 +79,7 @@
   # Stop highlighting
   {
     action = "<cmd>noh<CR>";
-    key = "<c-g>";
+    key = "<C-g>";
     options.desc = "Stop hightlighting";
   }
 

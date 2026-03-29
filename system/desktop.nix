@@ -30,6 +30,8 @@ in {
     modules.user
     # Use home-manager
     inputs.home-manager.nixosModules.default
+    inputs.nixvim.nixosModules.nixvim
+    ../modules/editors/nixvim/nixvim.nix
   ];
 
   networking.hostName = "mirl"; # Define your hostname.

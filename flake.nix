@@ -38,6 +38,7 @@
     odin-nightly = {
       url = "github:Yappaholic/odin-nightly";
     };
+    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = {

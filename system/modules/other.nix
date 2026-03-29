@@ -69,7 +69,7 @@ in {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    neovim-git
+    #neovim-git
     git
     home-manager
   ];
