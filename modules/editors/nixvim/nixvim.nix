@@ -32,9 +32,9 @@ in {
     };
     colorschemes = {
       melange.enable = false;
-      oxocarbon.enable = true;
+      oxocarbon.enable = false;
       kanagawa = {
-        enable = false;
+        enable = true;
         settings = {
           compile = true;
           terminalColors = true;

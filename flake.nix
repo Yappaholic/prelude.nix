@@ -4,6 +4,7 @@
   inputs = {
     cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     yt-x = {
       url = "github:Benexl/yt-x";
@@ -39,6 +40,19 @@
       url = "github:Yappaholic/odin-nightly";
     };
     nixvim.url = "github:nix-community/nixvim";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    oxwm = {
+      url = "github:tonybanters/oxwm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    waterfox = {
+      url = "github:Hythera/nix-waterfox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -46,6 +60,8 @@
     home-manager,
     cachyos-kernel,
     mango,
+    determinate,
+    chaotic,
     ...
   } @ inputs: let
     system = "x86-64-linux";
@@ -58,6 +74,8 @@
         ./system/desktop.nix
         home-manager.nixosModules.home-manager
         mango.nixosModules.mango
+        determinate.nixosModules.default
+        chaotic.nixosModules.default
         {
           nixpkgs.overlays = [
             cachyos-kernel.overlays.pinned

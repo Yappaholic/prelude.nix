@@ -4,7 +4,7 @@
     installBatSyntax = true;
     systemd.enable = true;
     settings = {
-      theme = "Oxocarbon";
+      theme = "Kanagawa Wave";
       font-size = 16;
       font-family = "Maple Mono NF";
       shell-integration-features = true;

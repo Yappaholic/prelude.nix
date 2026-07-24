@@ -28,12 +28,16 @@ in {
     settings = {
       experimental-features = ["nix-command" "flakes"];
       substituters = lib.mkForce [
-        "https://nixos-cache-proxy.cofob.dev"
-        "https://attic.xuyh0120.win/lantian"
+        "https://nixos-cache-proxy.cofob.dev" # nixpkgs proxy
+        "https://attic.xuyh0120.win/lantian" # cachyos kernel
+        "https://install.determinate.systems" # determinate nix
+        "https://noctalia.cachix.org" # noctalia
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
+        "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];

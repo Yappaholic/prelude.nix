@@ -1,44 +1,45 @@
 {
   enable = true;
-  appearance = {
-    nerd_font_variant = "normal";
-    use_nvim_cmp_as_default = true;
-  };
-  completion = {
-    accept = {
-      auto_brackets = {
-        enabled = true;
-        semantic_token_resolution = {
-          enabled = false;
+  settings = {
+    appearance = {
+      nerd_font_variant = "normal";
+      use_nvim_cmp_as_default = true;
+    };
+    completion = {
+      accept = {
+        auto_brackets = {
+          enabled = true;
+          semantic_token_resolution = {
+            enabled = false;
+          };
         };
       };
+      documentation = {
+        auto_show = true;
+      };
     };
-    documentation = {
-      auto_show = true;
+    keymap = {
+      preset = "default";
     };
-  };
-  keymap = {
-    preset = "default";
-  };
-  signature = {
-    enabled = true;
-  };
-  sources = {
-    cmdline = [];
-    providers = {
+    signature = {
+      enabled = true;
+    };
+    sources = {
+      cmdline = [];
       default = [
-        "path"
         "lsp"
         "buffer"
         "snippets"
       ];
-      buffer = {
-        enabled = true;
-        score_offset = -7;
-      };
-      lsp = {
-        enabled = true;
-        fallbacks = [];
+      providers = {
+        buffer = {
+          enabled = true;
+          score_offset = -7;
+        };
+        lsp = {
+          enabled = true;
+          fallbacks = [];
+        };
       };
       snippets.enabled = true;
       path.enabled = true;

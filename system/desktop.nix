@@ -30,8 +30,8 @@ in {
     modules.user
     # Use home-manager
     inputs.home-manager.nixosModules.default
-    inputs.nixvim.nixosModules.nixvim
-    ../modules/editors/nixvim/nixvim.nix
+    #inputs.nixvim.nixosModules.nixvim
+    #../modules/editors/nixvim/nixvim.nix
   ];
 
   networking.hostName = "mirl"; # Define your hostname.
@@ -61,13 +61,14 @@ in {
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
   };
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true;
+    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+    extraCompatPackages = with pkgs; [proton-cachyos_x86_64_v3];
+    localNetworkGameTransfers.openFirewall = false;
   };
   #virtualisation.waydroid.enable = false;
 

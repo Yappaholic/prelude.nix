@@ -6,26 +6,22 @@
 }: let
   system = pkgs.stdenv.hostPlatform.system;
   yt-x = inputs.yt-x.packages.${system}.default;
-  odin-git = inputs.odin-nightly.packages.${system}.default;
-  ols-git = inputs.odin-nightly.packages.${system}.ols;
+  waterfox = inputs.waterfox.packages.${system}.waterfox-bin;
+  noctalia = inputs.noctalia.packages.${system}.default;
 in {
   # My user account
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.fish;
-    extraGroups = ["networkmanager" "wheel" "kvm" "adbusers"];
+    shell = pkgs.zsh;
+    extraGroups = ["networkmanager" "wheel" "kvm" "adbusers" "pipewire" "video"];
     packages = with pkgs;
       additional-packages
       ++ [
-        clang-tools
-        clang
-        gopls
-        gofumpt
         # Programming languages
-        zig
-        zls
+        clang
         alejandra
+        python3
         #bash-env-nushell
         nixd
         rustup
@@ -34,46 +30,46 @@ in {
         #rustfmt
         #cargo
         #godot-mono
-        odin-git
-        ols-git
         man-pages
         man-pages-posix
+        luaPackages.fennel
+        fnlfmt
+        idris2
+        idris2Packages.idris2Lsp
 
         # Window managers and desktop
         ## X11
-        #polybar
-        #feh
-        #xclip
+        rofi
+        dunst
+        xmobar
         ## Other
-        ghostty
-        waybar
-        wlsunset
-        wl-clipboard
-        grim
-        slurp
-        swww
+        noctalia
+        waterfox
+        protonup-qt
+        alacritty
         telegram-desktop
-        wlogout
+
         #softmaker-office
         #corefonts
         #vistafonts
         #viber
         xdg-utils
         #youtube-music
-        vesktop
-        wmenu
+        vencord
 
         # Editors
         kakoune
         kakoune-lsp
         kak-tree-sitter-unwrapped
         emacs-lsp-booster
+        neovim
 
         # CLI tools
+        devenv
         nix-your-shell
         nurl
         #gitu
-        pass-wayland
+        jujutsu
         bc
         mpv
         yt-dlp
@@ -82,8 +78,12 @@ in {
         onefetch
         fastfetch
         bat
+        feh
         xclip
         xsel
+        xdotool
+        xset
+        setxkbmap
         dust
         tealdeer
         fzf

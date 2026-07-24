@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   gtk = {
     enable = true;
     cursorTheme = {
@@ -13,9 +17,11 @@
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
+    gtk4.theme = config.gtk.theme;
   };
 
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
     name = "Adwaita";
     package = pkgs.adwaita-icon-theme;

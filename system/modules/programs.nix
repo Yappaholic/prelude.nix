@@ -3,16 +3,9 @@
   inputs,
   ...
 }: let
-  niri-config = import ./niri.nix {inherit pkgs;};
+  niri-config = import ./niri.nix {inherit pkgs inputs;};
 in {
   programs = {
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true;
-    };
-
     # Window Managers
     hyprland.enable = true;
     sway = {
@@ -30,16 +23,17 @@ in {
       enable = true;
       package = inputs.wrappers.wrappers.niri.wrap niri-config;
     };
-    mango.enable = true;
+    mango.enable = false;
+    river.enable = false;
     xwayland = {
       enable = true;
-      package = pkgs.xwayland-satellite;
     };
 
     # Shells
     zsh = {
-      enable = false;
+      enable = true;
       loginShellInit = ''export PATH=/opt/bin:$PATH'';
+      promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     };
     fish.enable = true;
 
@@ -51,7 +45,7 @@ in {
 
     # Misc
     java = {
-      enable = true;
+      enable = false;
       package = pkgs.jdk25;
     };
     dconf.enable = true;

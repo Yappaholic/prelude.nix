@@ -1,22 +1,31 @@
 {
+  pkgs,
+  lib,
+  ...
+}: {
   programs.zsh = {
     enable = true;
-    antidote = {
+    autosuggestion.enable = true;
+    defaultKeymap = "emacs";
+    fastSyntaxHighlighting.enable = true;
+    historySubstringSearch.enable = true;
+    history.ignoreAllDups = true;
+    zsh-abbr = {
       enable = true;
-      plugins = [
-        "zsh-users/zsh-autosuggestions"
-        "zsh-users/zsh-history-substring-search"
-        "zdharma-continuum/fast-syntax-highlighting kind:defer"
-        "mafredri/zsh-async"
-        "marszall87/lambda-pure"
-      ];
+      abbreviations = {
+        nht = "nh os test";
+        nhs = "nh os switch";
+        v = "nvim";
+        k = "kak";
+      };
     };
-    sessionVariables = {
-      QT_QPA_PLATFORM = "wayland";
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      NVD_BACKEND = "direct";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    };
+    initContent = lib.mkOrder 1500 ''
+      #export QT_QPA_PLATFORM="wayland";
+      export LIBVA_DRIVER_NAME="nvidia"
+      export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+      export NVD_BACKEND="direct"
+      export ELECTRON_OZONE_PLATFORM_HINT="auto"
+      source ~/.p10k.zsh
+    '';
   };
 }

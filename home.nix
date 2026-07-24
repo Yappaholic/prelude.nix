@@ -15,14 +15,14 @@ in {
     ./modules/util/gtk.nix
     ./modules/shell/nushell.nix
     ./modules/shell/fish.nix
-    ./modules/programs/ghostty.nix
-    ./modules/programs/waybar.nix
-    ./modules/wm/mango.nix
+    #./modules/programs/ghostty.nix
+    #./modules/programs/waybar.nix
+    #./modules/wm/mango.nix
     #./modules/editors/zed.nix
     ./modules/programs/qutebrowser.nix
-    #./modules/shell/zsh.nix
-    inputs.mango.hmModules.mango
-    inputs.zen-browser.homeModules.beta
+    ./modules/shell/zsh.nix
+    #inputs.mango.hmModules.mango
+    #inputs.zen-browser.homeModules.beta
   ];
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -71,7 +71,7 @@ in {
       herbstluftwm = import ./modules/wm/herbsluftwm/config.nix {pkgs = pkgs;};
     };
   };
-  programs.zen-browser.enable = true;
+  #programs.zen-browser.enable = false;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -79,7 +79,7 @@ in {
   wayland = {
     windowManager = {
       hyprland = {
-        enable = true;
+        enable = false;
         settings = import ./modules/wm/hyprland/config.nix {inherit pkgs;};
         plugins = with pkgs; [
           hyprlandPlugins.hy3
@@ -108,6 +108,7 @@ in {
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+  home.shell.enableZshIntegration = true;
 
   home.file.".cargo/config.toml".text = ''
     [target.'cfg(target_os = "linux")']

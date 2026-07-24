@@ -6,6 +6,7 @@
     # htmx.enable = true;
     nushell.enable = true;
     ts_ls.enable = true;
+    serve_d.enable = true;
     # marksman.enable = true;
     gopls.enable = true;
     jsonls.enable = true;

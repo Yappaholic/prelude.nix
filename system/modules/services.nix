@@ -13,6 +13,10 @@
         layout = "us,ru";
         options = "grp:toggle,ctrl:nocaps";
       };
+      windowManager.oxwm = {
+        enable = true;
+        package = inputs.oxwm.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      };
       windowManager.qtile = {
         enable = false;
         package = inputs.qtile.packages.${pkgs.stdenv.hostPlatform.system}.qtile;
@@ -22,11 +26,10 @@
           ];
       };
       windowManager.xmonad = {
-        enable = false;
+        enable = true;
         enableContribAndExtras = true;
         config = null;
         enableConfiguredRecompile = true;
-        haskellPackages = pkgs.haskell.packages.ghc984;
         ghcArgs = ["-O2"];
       };
     };
@@ -48,7 +51,7 @@
 
     # Emacs with packages and daemon
     emacs = {
-      enable = true;
+      enable = false;
       install = true;
       package = with pkgs; (
         (emacsPackagesFor emacs-pgtk).emacsWithPackages (
@@ -67,5 +70,13 @@
 
     # Need for authentication
     pcscd.enable = true;
+
+    # Scx scheduler
+    scx = {
+      enable = true;
+      scheduler = "scx_bpfland";
+      extraArgs = ["-m performance -w"];
+      package = pkgs.scx.rustscheds;
+    };
   };
 }
