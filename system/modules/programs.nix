@@ -4,27 +4,30 @@
   ...
 }: let
   niri-config = import ./niri.nix {inherit pkgs inputs;};
+  system = pkgs.stdenv.hostPlatform.system;
+  swayfx-git = inputs.swayfx.packages.${system}.default.overrideAttrs (final: prev: {
+    passthru = {
+      providedSessions = ["sway"];
+    };
+  });
 in {
   programs = {
     # Window Managers
-    hyprland.enable = true;
+    hyprland.enable = false;
     sway = {
-      enable = false;
-      package = pkgs.swayfx;
+      enable = true;
+      package = swayfx-git;
       wrapperFeatures.gtk = true;
       extraOptions = ["--unsupported-gpu"];
-      extraPackages = with pkgs; [
-        i3status-rust
-        autotiling-rs
-        swayidle
+      extraPackages = pkgs.lib.mkForce [
+        pkgs.i3status-rust
+        pkgs.autotiling-rs
       ];
     };
     niri = {
       enable = true;
       package = inputs.wrappers.wrappers.niri.wrap niri-config;
     };
-    mango.enable = false;
-    river.enable = false;
     xwayland = {
       enable = true;
     };

@@ -1,10 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
-  noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-in {
+{pkgs, ...}: {
   inherit pkgs;
   settings = {
     xwayland-satellite.path = pkgs.lib.getExe pkgs.xwayland-satellite;
@@ -64,7 +58,7 @@ in {
       "Mod+Shift+Slash".show-hotkey-overlay = _: {};
       "Mod+Ctrl+E".spawn-sh = "emacsclient -c";
       "Mod+Return".spawn = "${pkgs.lib.getExe pkgs.foot}";
-      "Mod+Space".spawn-sh = "${pkgs.lib.getExe noctalia} msg panel-toggle launcher";
+      "Mod+Space".spawn-sh = "${pkgs.lib.getExe pkgs.noctalia} msg panel-toggle launcher";
       "Mod+O".toggle-overview = _: {};
       "Mod+Q".close-window = _: {};
 
@@ -118,7 +112,7 @@ in {
       "Mod+Shift+E".quit = _: {};
     };
     spawn-at-startup = [
-      (pkgs.lib.getExe noctalia)
+      (pkgs.lib.getExe pkgs.noctalia)
       "systemctl --user restart gammastep"
     ];
   };

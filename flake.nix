@@ -2,55 +2,24 @@
   description = "Nixos config flake";
 
   inputs = {
-    cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
-    yt-x = {
-      url = "github:Benexl/yt-x";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
-    qtile = {
-      url = "github:qtile/qtile";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mango = {
-      url = "github:DreamMaoMao/mangowc";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    neovim-nightly = {
-      url = "github:nix-community/neovim-nightly-overlay";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    odin-nightly = {
-      url = "github:Yappaholic/odin-nightly";
-    };
-    nixvim.url = "github:nix-community/nixvim";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    noctalia = {
-      url = "github:noctalia-dev/noctalia/cachix";
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    oxwm = {
-      url = "github:tonybanters/oxwm";
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    waterfox = {
-      url = "github:Hythera/nix-waterfox";
+    swayfx = {
+      url = "github:WillPower3309/swayfx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -58,8 +27,6 @@
   outputs = {
     nixpkgs,
     home-manager,
-    cachyos-kernel,
-    mango,
     determinate,
     chaotic,
     ...
@@ -73,14 +40,8 @@
       modules = [
         ./system/desktop.nix
         home-manager.nixosModules.home-manager
-        mango.nixosModules.mango
         determinate.nixosModules.default
         chaotic.nixosModules.default
-        {
-          nixpkgs.overlays = [
-            cachyos-kernel.overlays.pinned
-          ];
-        }
         {
           home-manager.useUserPackages = true;
           home-manager.users.savvy = import ./home.nix;
@@ -96,7 +57,6 @@
       modules = [
         ./system/laptop.nix
         home-manager.nixosModules.home-manager
-        mango.nixosModules.mango
         {
           home-manager.useUserPackages = true;
           home-manager.users.savvy = import ./home.nix;

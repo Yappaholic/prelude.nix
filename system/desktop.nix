@@ -32,6 +32,8 @@ in {
     inputs.home-manager.nixosModules.default
     #inputs.nixvim.nixosModules.nixvim
     #../modules/editors/nixvim/nixvim.nix
+    inputs.disko.nixosModules.default
+    ../scripts/disko.nix
   ];
 
   networking.hostName = "mirl"; # Define your hostname.
@@ -40,11 +42,6 @@ in {
     /Windows
     protocol: efi
     path: uuid(4d96f285-5db8-11f0-95ec-1c1b0d09ace4):/EFI/Microsoft/Boot/bootmgfw.efi
-    /Gentoo
-    protocol: linux
-    path: uuid(1f4a26c9-dd2c-43f9-a0a1-5d715198851c):/boot/linux-6.18.1-bzImage
-    module_path: uuid(1f4a26c9-dd2c-43f9-a0a1-5d715198851c):/boot/linux-6.18.1-initrd
-    cmdline: root=UUID=4971dfa0-d2ad-45ea-b22f-7da1f5afd963 rootfstype=btrfs rw nvidia-drm.fbdev=1
   '';
   services.xserver = {
     xkb.variant = "colemak_dh_wide_iso,";

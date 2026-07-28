@@ -5,23 +5,21 @@
   ...
 }: let
   system = pkgs.stdenv.hostPlatform.system;
-  yt-x = inputs.yt-x.packages.${system}.default;
-  waterfox = inputs.waterfox.packages.${system}.waterfox-bin;
-  noctalia = inputs.noctalia.packages.${system}.default;
+  helium = inputs.helium.packages.${system}.default;
+  kak-popup = import ../../modules/programs/kak-popup.nix {inherit pkgs;};
 in {
   # My user account
   users.users.savvy = {
     isNormalUser = true;
     description = "Nixyy";
-    shell = pkgs.zsh;
-    extraGroups = ["networkmanager" "wheel" "kvm" "adbusers" "pipewire" "video"];
+    shell = pkgs.fish;
+    extraGroups = ["networkmanager" "wheel" "kvm" "adbusers" "pipewire" "video" "seat"];
     packages = with pkgs;
       additional-packages
       ++ [
         # Programming languages
-        clang
+        gcc16
         alejandra
-        python3
         #bash-env-nushell
         nixd
         rustup
@@ -34,21 +32,27 @@ in {
         man-pages-posix
         luaPackages.fennel
         fnlfmt
-        idris2
-        idris2Packages.idris2Lsp
+        zig
+        zls
 
         # Window managers and desktop
         ## X11
+        i3status-rust
         rofi
         dunst
         xmobar
         ## Other
+        jay
+        river
+        wl-tray-bridge
+        awww
+        wlsunset
         noctalia
-        waterfox
-        protonup-qt
+        helium
+        protonup-rs
         alacritty
+        foot
         telegram-desktop
-
         #softmaker-office
         #corefonts
         #vistafonts
@@ -61,31 +65,27 @@ in {
         kakoune
         kakoune-lsp
         kak-tree-sitter-unwrapped
+        kak-popup
         emacs-lsp-booster
         neovim
 
         # CLI tools
         devenv
         nix-your-shell
-        nurl
         #gitu
         jujutsu
-        bc
-        mpv
-        yt-dlp
-        yt-x
+        zellij
         btop
         onefetch
         fastfetch
         bat
-        feh
         xclip
         xsel
         xdotool
         xset
         setxkbmap
         dust
-        tealdeer
+        tldr
         fzf
         fd
         tmux

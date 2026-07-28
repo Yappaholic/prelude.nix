@@ -10,22 +10,8 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "ntsync" ];
+  boot.kernelModules = [ "kvm-intel" "ntsync"];
   boot.extraModulePackages = [ ];
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/02ce84aa-3a68-4851-8aa8-a2f3c87a5747";
-      fsType = "btrfs";
-      options = ["noatime" "compress=zstd"];
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E32E-47BF";
-      fsType = "vfat";
-      options = [ "umask=0022" ];
-    };
-
-  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

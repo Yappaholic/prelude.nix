@@ -5,5 +5,5 @@ SCRIPTPATH=$( cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
 sudo nixos-install --flake ${SCRIPTPATH}/..#mirl\
 	--option 'substituters' 'https://nixos-cache-proxy.cofob.dev'\
-	--option 'extra-substituters' 'https://attic.xuyh0120.win/lantian https://install.determinate.systems https://noctalia.cachix.org'\
-       	--option 'extra-trusted-public-keys' 'lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc= cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM= noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4='
+	--option 'extra-substituters' 'https://nyx-cache.chaotic.cx/ https://install.determinate.systems'\
+       	--option 'extra-trusted-public-keys' 'nyx-cache.chaotic.cx:dJxTrgMC3V3cFfyIiBQDQorG6k1LsqurH/srpMSq7qk= cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM='
